@@ -1,0 +1,28 @@
+name: Mermaid Demo
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16
+
+    - name: Install Mermaid CLI
+      run: npm install -g @mermaid-js/mermaid-cli
+
+    - name: Generate Mermaid Diagram
+      run: |
+        mmdc -i diagram.mmd -o diagram.png
+      env:
+        INPUT_FILE: diagram.mmd  # Specify your Mermaid file
