@@ -1,4 +1,4 @@
-name: Mermaid Demo
+name: Render Mermaid Diagram
 
 on:
   push:
@@ -6,29 +6,34 @@ on:
       - main
 
 jobs:
-  build:
+  render-diagram:
     runs-on: ubuntu-latest
-    
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      # Check out the repository
+      - name: Check out repository
+        uses: actions/checkout@v3
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: 16
+      # Set dynamic build number
+      - name: Set Build Number
+        id: build_number
+        run: echo "BUILD_NUMBER=${{ github.run_number }}" >> $GITHUB_ENV
 
-    - name: Install Mermaid CLI
-      run: npm install -g @mermaid-js/mermaid-cli
+      # Replace placeholder in Mermaid template
+      - name: Generate Mermaid Diagram
+        run: |
+          sed "s/{{BUILD_NUMBER}}/${{ env.BUILD_NUMBER }}/g" diagram_template.mmd > diagram.mmd
 
-    - name: Generate Mermaid Diagram
-      run: |
-        mmdc -i example.mmd -o example.png
-      env:
-        INPUT_FILE: diagram.mmd  # Specify your Mermaid file
+      # Install Mermaid CLI
+      - name: Install Mermaid CLI
+        run: npm install -g @mermaid-js/mermaid-cli
 
-    - name: Upload Diagram Artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: rendered-diagram
-        path: example.png
+      # Render Mermaid diagram
+      - name: Render Diagram
+        run: mmdc -i diagram.mmd -o diagram.svg
+
+      # Upload the generated diagram as an artifact
+      - name: Upload Diagram Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: rendered-diagram
+          path: diagram.svg
