@@ -19,9 +19,8 @@ jobs:
         run: echo "BUILD_NUMBER=${{ github.run_number }}" >> $GITHUB_ENV
 
       # Replace placeholder in Mermaid template
-      - name: Generate Mermaid Diagram
-        run: |
-          sed "s/{{BUILD_NUMBER}}/${{ env.BUILD_NUMBER }}/g" diagram_template.mmd > diagram.mmd
+      - name: Replace Build Number
+        run: sed "s/{{BUILD_NUMBER}}/${{ env.BUILD_NUMBER }}/g" diagram_template.mmd > diagram.mmd
 
       # Install Mermaid CLI
       - name: Install Mermaid CLI
