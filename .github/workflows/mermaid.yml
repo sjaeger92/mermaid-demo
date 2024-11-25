@@ -16,7 +16,14 @@ jobs:
       # Set dynamic build number
       - name: Set Build Number
         id: build_number
-        run: echo "BUILD_NUMBER=${{ github.run_number }}" >> $GITHUB_ENV
+        run: echo "BUILD_NUMBER="${{ github.run_number }} >> $GITHUB_ENV
+
+      # Debugging
+      - name: Debug Build Number
+        run: echo "Current Build Number:" ${{ env.BUILD_NUMBER }}
+
+      - name: Debug Diagram File
+        run: cat diagram.mmd
 
       # Replace placeholder in Mermaid template
       - name: Replace Build Number
