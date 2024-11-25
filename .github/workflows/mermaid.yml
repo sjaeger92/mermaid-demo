@@ -26,3 +26,9 @@ jobs:
         mmdc -i example.mmd -o example.png
       env:
         INPUT_FILE: diagram.mmd  # Specify your Mermaid file
+
+    - name: Upload Diagram Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: rendered-diagram
+        path: example.png
