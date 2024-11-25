@@ -23,6 +23,6 @@ jobs:
 
     - name: Generate Mermaid Diagram
       run: |
-        mmdc -i diagram.mmd -o diagram.png
+        mmdc -i example.mmd -o example.png
       env:
         INPUT_FILE: diagram.mmd  # Specify your Mermaid file
