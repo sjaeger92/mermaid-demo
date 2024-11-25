@@ -1,1 +1,1 @@
-# mermaid-demo
+# Welcome to this Mermaid demo.
