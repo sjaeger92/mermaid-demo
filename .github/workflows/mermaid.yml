@@ -18,13 +18,6 @@ jobs:
         id: build_number
         run: echo "BUILD_NUMBER="${{ github.run_number }} >> $GITHUB_ENV
 
-      # Debugging
-      - name: Debug Build Number
-        run: echo "Current Build Number:" ${{ env.BUILD_NUMBER }}
-
-      - name: Debug Diagram File
-        run: cat diagram_template.mmd
-
       # Replace placeholder in Mermaid template
       - name: Replace Build Number
         run: sed "s/{{BUILD_NUMBER}}/${{ env.BUILD_NUMBER }}/g" diagram_template.mmd > diagram.mmd
