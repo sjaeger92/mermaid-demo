@@ -28,7 +28,7 @@ jobs:
 
       # Render Mermaid diagram
       - name: Render Diagram
-        run: mmdc -i diagram.mmd -o diagram.svg
+        run: mmdc -i diagram.mmd -o diagram.png
 
       # Upload the generated diagram as an artifact
       - name: Upload Diagram Artifact
