@@ -23,7 +23,7 @@ jobs:
         run: echo "Current Build Number:" ${{ env.BUILD_NUMBER }}
 
       - name: Debug Diagram File
-        run: cat diagram.mmd
+        run: cat diagram_template.mmd
 
       # Replace placeholder in Mermaid template
       - name: Replace Build Number
