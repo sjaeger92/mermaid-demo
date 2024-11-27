@@ -12,5 +12,5 @@ jobs:
         run: |
           curl -X POST -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
           -H "Accept: application/vnd.github.v3+json" \
-          https://api.github.com/repos/<user>/<repo>/dispatches \
+          https://api.github.com/repos/sjaeger92/mermaid-demo/dispatches \
           -d '{"event_type":"build_trigger"}'
