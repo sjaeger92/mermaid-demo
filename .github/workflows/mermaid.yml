@@ -1,9 +1,8 @@
 name: Render Mermaid Diagram
 
 on:
-  push:
-    branches:
-      - main
+  repository_dispatch:
+    types: [build_trigger]
 
 jobs:
   render-diagram:
@@ -16,7 +15,7 @@ jobs:
       # Set dynamic build number
       - name: Set Build Number
         id: build_number
-        run: echo "BUILD_NUMBER="${{ github.run_number + 1 }} >> $GITHUB_ENV
+        run: echo "BUILD_NUMBER="${{ github.run_number }} >> $GITHUB_ENV
 
       # Replace placeholder in Mermaid template
       - name: Replace Build Number
